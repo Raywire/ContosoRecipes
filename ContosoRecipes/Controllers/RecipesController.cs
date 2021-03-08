@@ -11,37 +11,44 @@ namespace ContosoRecipes.Controllers
     [Route("api/[controller]")]
     public class RecipesController : Controller
     {
-        // GET: api/values
+        // GET: api/Recipes
         [HttpGet]
-        public string[] GetDishes()
+        public ActionResult GetDishes()
         {
-            string[] dishes = { "Oxtail", "Curry Chicken", "Dumplings" };
-            return dishes;
+            string[] recipes = { "Oxtail", "Curry Chicken", "Dumplings" };
+
+            if (!recipes.Any())
+                return NotFound();
+            return Ok(recipes);
         }
 
-        // GET api/values/5
+        // GET api/Recipes/:id
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/values
+        // POST api/Recipes
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void CreateNewRecipes([FromBody] string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT api/Recipes/:id
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/Recipes/:id
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult DeleteRecipes(int id)
         {
+            bool badThingsHappened = false;
+            if (badThingsHappened)
+                return BadRequest();
+            return NoContent();
         }
     }
 }
