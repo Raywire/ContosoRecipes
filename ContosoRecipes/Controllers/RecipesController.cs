@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ContosoRecipes.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ContosoRecipes.Controllers
 {
-    //[Route("api/[controller]")]
-    [Route("api/recipes")]
+    [Route("api/[controller]")]
     public class RecipesController : Controller
     {
         // GET: api/Recipes
         [HttpGet]
-        public ActionResult GetRecipes([FromQuery]int count)
+        public ActionResult GetRecipes([FromQuery] int count)
         {
-            string[] recipes = { "Oxtail", "Curry Chicken", "Dumplings" };
+            Recipe[] recipes = {
+                new() { Title ="Oxtail"},
+                new() { Title ="Curry Chicken"},
+                new() { Title ="Dumplings" }
+            };
 
-            if (!recipes.Any())
-                return NotFound();
-            return Ok(recipes);
+            return Ok(recipes.Take(count));
         }
 
         // GET api/Recipes/:id
@@ -32,8 +34,12 @@ namespace ContosoRecipes.Controllers
 
         // POST api/Recipes
         [HttpPost]
-        public void CreateNewRecipes([FromBody] string value)
+        public ActionResult CreateNewRecipes([FromBody] Recipe newRecipe)
         {
+            bool badThingsHappened = false;
+            if (badThingsHappened)
+                return BadRequest();
+            return Created("", newRecipe);
         }
 
         // PUT api/Recipes/:id
