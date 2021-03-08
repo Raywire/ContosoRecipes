@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ContosoRecipes.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/recipes")]
     public class RecipesController : Controller
     {
         // GET: api/Recipes
