@@ -14,7 +14,7 @@ namespace ContosoRecipes.Controllers
     {
         // GET: api/Recipes
         [HttpGet]
-        public ActionResult GetDishes()
+        public ActionResult GetRecipes([FromQuery]int count)
         {
             string[] recipes = { "Oxtail", "Curry Chicken", "Dumplings" };
 
